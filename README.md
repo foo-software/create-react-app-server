@@ -1,6 +1,6 @@
-## Note About the State of This Repo (9/11/2019):
+## Note About the State of This Repo (10/14/2019):
 
-> This codebase has been under heavy transformation. We recently extracted a secondary application into [its own repo](https://github.com/paperlesspost/home). The `home` repo now serves "discovery" types of pages like the home page, `/flyer`, `/cards`, etc. This repo still serves certain pages related to the "create" experience, distribution and tracking, etc. With the support of "Home" team - "Pages" and "Media" teams will own this repo moving forward, until they find a more appropriate home for the existing routes.
+> This project is an unstable work in progress at the moment.
 
 ***
 
