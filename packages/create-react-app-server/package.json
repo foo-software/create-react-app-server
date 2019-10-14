@@ -1,0 +1,82 @@
+{
+  "name": "@foo-software/create-react-app-server",
+  "version": "0.0.1",
+  "description": "Create React App Server provides server side rendering as a standalone process.",
+  "keywords": [
+    "react",
+    "ssr",
+    "server",
+    "side",
+    "rendering"
+  ],
+  "author": "Adam Henson <adamhenson1979@gmail.com>",
+  "homepage": "https://github.com/foo-software/create-react-app-server#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo-software/create-react-app-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/foo-software/create-react-app-server/issues"
+  },
+  "bin": {
+    "create-react-app-server": "dist/bin/create-react-app-server.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "babel ./src --out-dir dist",
+    "dev": "LOG_LEVEL=debug npm-run-all server",
+    "prepare": "npm run clean && npm run build",
+    "production": "npm-run-all clean build server:prod",
+    "server": "babel-node ./src/bin/create-react-app-server",
+    "server:prod": "node ./dist/bin/create-react-app-server",
+    "start": "npm run production",
+    "test": "jest",
+    "watch": "nodemon"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/cra-build/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-errors": "^1.7.2",
+    "morgan": "~1.9.0",
+    "node-fetch": "^2.5.0",
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^1.20.0",
+    "shelljs": "^0.8.3",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "husky": "^3.0.1",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.0",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3"
+  }
+}
