@@ -1,7 +1,5 @@
 import fs from 'fs';
 import http from 'http';
-import path from 'path';
-import shell from 'shelljs';
 import createApp from './app';
 import logger from './logger';
 import {
@@ -10,23 +8,11 @@ import {
 } from './constants';
 
 const LOGGER_NAMESPACE = 'server';
-const CRA_BUILD_DIRECTORY = 'cra-build';
 
-// fetch CRA build. copies files locally, but eventually we'll want
-// the option to fetch from a remote source like S3.
-const moveBuildFiles = ({ craBuildPath }) => {
-  const craAppBuildPath = path.resolve(`./${CRA_BUILD_DIRECTORY}`);
-  logger.debug(
-    `${LOGGER_NAMESPACE}: moveBuildFiles: craAppBuildPath: ${craAppBuildPath}`
-  );
-
-  shell.exec(`mkdir -p ${craAppBuildPath}`);
-
-  // copy contents of build directory
-  shell.exec(`cp -R ${craBuildPath}/. ${craAppBuildPath}`);
-
-  const indexPath = `${craAppBuildPath}/index.html`;
-  const templatePathPuppeteer = `${craAppBuildPath}/${FILENAME_PUPPETEER}`;
+// create an HTML file to render on Puppeteer runs
+const createPuppeteerFile = ({ craBuildPath }) => {
+  const indexPath = `${craBuildPath}/index.html`;
+  const templatePathPuppeteer = `${craBuildPath}/${FILENAME_PUPPETEER}`;
 
   // split the dom after opening <head>
   const [beginningHtml, endingHtml] = fs
@@ -42,6 +28,10 @@ const moveBuildFiles = ({ craBuildPath }) => {
   // add the window property and join resulting html as a string
   const updatedHtml = [beginningHtml, windowSetHtml, endingHtml].join('');
   fs.writeFileSync(templatePathPuppeteer, updatedHtml);
+
+  logger.debug(
+    `${LOGGER_NAMESPACE}: createPuppeteerFile: file created: ${templatePathPuppeteer}`
+  );
 };
 
 const normalizePort = val => {
@@ -99,7 +89,7 @@ export const startServer = async ({ craBuildPath, ...options }) => {
     throw new Error('build path is undefined.');
   }
 
-  moveBuildFiles({ craBuildPath });
+  createPuppeteerFile({ craBuildPath });
 
   const app = createApp({
     ...options,

@@ -5,7 +5,7 @@ import staticMiddleware from './middleware/static';
 
 const isDebug = process.env.LOG_LEVEL === 'debug';
 
-export default ({ craBuildPath, ...options }) => {
+export default (options) => {
   const app = express();
 
   // log all requests if in debug mode, otherwise only errors
@@ -20,7 +20,7 @@ export default ({ craBuildPath, ...options }) => {
 
   // static files
   app.use('/', (req, res, next) =>
-    staticMiddleware({ craBuildPath, req, res, next })
+    staticMiddleware({ craBuildPath: options.craBuildPath, req, res, next })
   );
 
   // @TODO: allow option to pass in middleware.

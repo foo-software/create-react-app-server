@@ -1,4 +1,4 @@
 {
-  "buildPath": "../../../lighthouse-check-www/build",
+  "buildPath": "../../../../../lighthouse-check-www/build",
   "urlPatterns": ["^((?!/api).)*$"]
 }

@@ -1,13 +1,8 @@
-import path from 'path';
 import createHtmlFile from '../helpers/createHtmlFile';
 import logger from '../logger';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
 import { FILENAME_PUPPETEER, HEADER_PUPPETEER } from '../constants';
-
-const BUILD_RELATIVE_PATH = '../../cra-build';
-const BUILD_PATH = path.join(__dirname + `/${BUILD_RELATIVE_PATH}`);
-const BUILD_PATH_INDEX = `${BUILD_PATH}/index.html`;
 
 const LOGGER_NAMESPACE = 'createReactApp';
 
@@ -52,7 +47,7 @@ export default async ({ req, res, next, options }) => {
     } else if (req.headers[HEADER_PUPPETEER]) {
       // else if the request is coming from puppeteer - mimic cra
       logger.debug(`${LOGGER_NAMESPACE}: serving for puppeteer: ${url}`);
-      return res.sendFile(`${BUILD_PATH}/${FILENAME_PUPPETEER}`);
+      return res.sendFile(`${options.craBuildPath}/${FILENAME_PUPPETEER}`);
     } else {
       // else - we don't have this html file yet, so we need to create one
       let shouldRunPuppeteer = true;
@@ -91,11 +86,11 @@ export default async ({ req, res, next, options }) => {
 
         if (head || html) {
           const filename = !isHome ? `${url}.html` : '/home.html';
-          const path = `${BUILD_PATH}${filename}`;
+          const path = `${options.craBuildPath}${filename}`;
           createHtmlFile({
             head,
             html,
-            templatePath: BUILD_PATH_INDEX,
+            templatePath: `${options.craBuildPath}/index.html`,
             path
           });
 
