@@ -5,7 +5,7 @@ import staticMiddleware from './middleware/static';
 
 const isDebug = process.env.LOG_LEVEL === 'debug';
 
-export default (options) => {
+export default options => {
   const app = express();
 
   // log all requests if in debug mode, otherwise only errors
