@@ -94,7 +94,9 @@ export default Component => withCreateReactAppServerHelmetProvider(props => {
   const Helmet = useContext(CreateReactAppServerHelmetContext);
 
   const setRenderedString = () => {
-    window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(Helmet.peek());
+    if (Helmet) {
+      window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(Helmet.peek());
+    }
 
     const html = ReactDOMServer.renderToString(<Component {...props} />);
 
