@@ -1,0 +1,61 @@
+{
+  "name": "@foo-software/create-react-app-server-helmet",
+  "version": "0.0.6",
+  "description": "A react-helmet for Create React Server",
+  "keywords": [
+    "react-helmet",
+    "cra",
+    "ssr"
+  ],
+  "author": "Adam Henson <adamhenson1979@gmail.com>",
+  "homepage": "https://github.com/foo-software/create-react-app-server#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo-software/create-react-app-server.git"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "BABEL_ENV=production babel ./src --out-dir dist",
+    "prepare": "npm run clean && npm run build",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-helmet": "5.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "babel-preset-react-app": "^9.0.2",
+    "husky": "^3.0.1",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3"
+  }
+}
