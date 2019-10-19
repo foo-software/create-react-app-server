@@ -22,6 +22,7 @@ Below is a to-do list ordered by priority to help make this project what it shou
 
 - Provide implementation option to customize Express.
 - Provide implementation option to customize static files in Express (caching, etc).
+- GitHub Action - workflow. Create a workflow to run tests.
 - Example apps - as a package.
 - More unit tests (Jest).
 - Integration tests - as a package. Cypress could be a good framework for this. We could test the example app with newest releases.
