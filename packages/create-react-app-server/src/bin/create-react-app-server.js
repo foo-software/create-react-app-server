@@ -64,13 +64,4 @@ if (options.configFile) {
 
 logger.debug(`${LOGGER_NAMESPACE}: options`, options);
 
-if (!options.buildPath) {
-  throw new Error('build path is undefined.');
-}
-
-const craBuildPath = path.resolve(options.buildPath);
-
-startServer({
-  ...options,
-  craBuildPath
-});
+startServer(options);

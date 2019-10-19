@@ -16,6 +16,16 @@ Despite major progress of the HTTP protocol and engines serving web pages, serve
 
 Create React App Server is a Node.js [Express](https://expressjs.com/) application. It accepts Express customization options and more. It serves static files from a Create React App build. It parses client side rendered HTML, writes output to HTML files on disk, and caches the relationship in memory so proceeding requests are served a static file without heavy lifting.
 
+# Upcoming
+
+Below is a to-do list ordered by priority to help make this project what it should be. PRs are welcome 🙏
+
+- Provide implementation option to customize Express.
+- Provide implementation option to customize static files in Express (caching, etc).
+- Example apps - as a package.
+- More unit tests (Jest).
+- Integration tests - as a package. Cypress could be a good framework for this. We could test the example app with newest releases.
+
 # FAQ
 
 - **When HTML files are generated - is `asset-manifest.json` also updated?** No, this file doesn't seem applicable to the application runtime based on [Webpack documentation](https://webpack.js.org/concepts/manifest/) and this [answered issue](https://github.com/facebook/create-react-app/issues/6436).

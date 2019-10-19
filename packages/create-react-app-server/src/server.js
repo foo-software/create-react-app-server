@@ -1,9 +1,11 @@
 import fs from 'fs';
+import path from 'path';
 import http from 'http';
 import createApp from './app';
 import logger from './logger';
 import {
   CREATE_REACT_APP_SERVER_PUPPETEER,
+  DEFAULT_BUILD_PATH,
   FILENAME_PUPPETEER
 } from './constants';
 
@@ -84,10 +86,11 @@ const onListening = server => {
   logger.info(`Listening on ${bind}`);
 };
 
-export const startServer = async ({ craBuildPath, ...options }) => {
-  if (!craBuildPath) {
-    throw new Error('build path is undefined.');
-  }
+export const startServer = async ({
+  buildPath = DEFAULT_BUILD_PATH,
+  ...options
+}) => {
+  const craBuildPath = path.resolve(buildPath);
 
   createPuppeteerFile({ craBuildPath });
 
