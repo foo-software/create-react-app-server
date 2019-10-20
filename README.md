@@ -34,7 +34,9 @@ Below is a more elaborate explanation of the Create React App Server flow. It do
 Below is a standard example assuming a Create React App project with Redux.
 
 ```bash
-$ npm install @foo-software/create-react-app-server @foo-software/create-react-app-server-helmet @foo-software/with-server-side-caching
+$ npm install @foo-software/create-react-app-server \
+  @foo-software/create-react-app-server-helmet \
+  @foo-software/with-server-side-caching
 ```
 
 > package.json
