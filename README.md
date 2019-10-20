@@ -95,7 +95,7 @@ export default withServerSideCaching(Route);
 
 ### With Helmet
 
-Create React Server provides its own `helmet` which extends `react-helmet` and allows for server side rendering of `head` elements defined in `helmet`. The API is that of `react-helmet`.
+Create React Server provides its own `helmet` which extends [`react-helmet`](https://github.com/nfl/react-helmet) and allows for server side rendering of `head` elements defined in `helmet`. The API is that of `react-helmet`.
 
 Example:
 
