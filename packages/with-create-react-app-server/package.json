@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/with-create-react-app-server",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "HOCs and providers to bind a Create React App to the server.",
   "keywords": [
     "react",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.6.3",
-    "@foo-software/create-react-app-server-helmet": "^0.0.12"
+    "@foo-software/create-react-app-server-helmet": "^0.0.13"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

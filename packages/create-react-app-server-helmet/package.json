@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/create-react-app-server-helmet",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A react-helmet for Create React Server",
   "keywords": [
     "react-helmet",
@@ -52,8 +52,8 @@
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/node": "^7.2.2",
-		"@babel/preset-env": "^7.6.3",
-		"@babel/preset-react": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
     "@babel/register": "^7.4.4",
     "babel-jest": "^24.9.0",
     "husky": "^3.0.1",
