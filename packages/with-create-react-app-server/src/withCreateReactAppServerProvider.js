@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import CreateReactAppServerContext from './CreateReactAppServerContext';
 import {
-  CreateReactAppServerHelmetContext,
-  withCreateReactAppServerHelmetProvider
+  CreateReactAppServerHelmet
 } from '@foo-software/create-react-app-server-helmet';
 
 const DATA_REACT_HELMET = 'data-react-helmet';
@@ -86,25 +85,14 @@ const getHelmetString = helmet => {
   return titleTag + baseTag + linkTags + metaTags + scriptTags + styleTags;
 };
 
-export default Component => withCreateReactAppServerHelmetProvider(props => {
+export default Component => props => {
   if (!window.CREATE_REACT_APP_SERVER_PUPPETEER) {
     return <Component {...props} />;
   }
 
-  const Helmet = useContext(CreateReactAppServerHelmetContext);
-
   const setRenderedString = () => {
-    if (Helmet) {
-      window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(Helmet.peek());
-    }
-
-    const html = ReactDOMServer.renderToString(<Component {...props} />);
-
-    // strip out HTML not meant to be inside body - from Helmet
-    const regex = /<create-react-app-server-helmet-context>([\s\S]*?)<\/create-react-app-server-helmet-context>/;
-    const [match] = html.match(regex);
-
-    window.CREATE_REACT_APP_SERVER_DOM = html.replace(match, '');
+    window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(CreateReactAppServerHelmet.peek());
+    window.CREATE_REACT_APP_SERVER_DOM = ReactDOMServer.renderToString(<Component {...props} />);
   };
 
   return (
@@ -114,4 +102,4 @@ export default Component => withCreateReactAppServerHelmetProvider(props => {
       <Component {...props} />
     </CreateReactAppServerContext.Provider>
   );
-});
+};

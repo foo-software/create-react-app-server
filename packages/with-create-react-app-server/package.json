@@ -44,10 +44,12 @@
     ]
   },
   "browserslist": ">0.2%, not dead, not op_mini all",
-  "dependencies": {
-    "@foo-software/create-react-app-server-helmet": "^0.0.9",
+  "peerDependencies": {
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
+  },
+  "dependencies": {
+    "@foo-software/create-react-app-server-helmet": "^0.0.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -58,9 +60,11 @@
     "babel-jest": "^24.9.0",
     "babel-preset-react-app": "^9.0.2",
     "husky": "^3.0.1",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "rimraf": "^2.6.3"
   }
 }
