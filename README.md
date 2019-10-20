@@ -1,9 +1,3 @@
-## Note About the State of This Repo (10/14/2019):
-
-> This project is an unstable work in progress at the moment.
-
-***
-
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 # Create React App Server
@@ -34,6 +28,77 @@ Below is a more elaborate explanation of the Create React App Server flow. It do
   - A new file is cloned from `index.html`, injected with the HTML string from above, and renamed based on the route. 
 - A key based on route and path is added to cache for proceeding requests.
 - We then respond to the request with the new HTML file. This request will take a fair amount of time to be fulfilled, but will only occur once per route.
+
+## Usage
+
+Below is a standard example assuming a Create React App project with Redux.
+
+```bash
+$ npm install @foo-software/create-react-app-server @foo-software/create-react-app-server-helmet @foo-software/with-server-side-caching
+```
+
+> package.json
+
+```diff
+- "start": "npm run build && serve -s build",
++ "start": "npm run build && npm run start:server",
+```
+
+> src/index.js
+
+```diff
+- import { Provider } from 'react-redux';
++ import { Provider as ReduxProvider } from 'react-redux';
++ import { withServerSideCachingProvider } from '@foo-software/with-server-side-caching';
+// ...
+
+- ReactDOM.render(
++ const Provider = withServerSideCachingProvider(ReduxProvider);
++ 
++ const rootElement = document.getElementById('root');
++ const render = !rootElement.hasChildNodes()
++   ? ReactDOM.render
++   : ReactDOM.hydrate;
++ 
++ render(
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>,
+-  document.getElementById('root')
++  rootElement
+);
+```
+
+> src/HelloWorld.js
+
+```jsx
+// ...
+import { withServerSideCaching } from '@foo-software/with-server-side-caching';
+
+// ...
+
+export default withServerSideCaching(() => <h1>Hello World</h1>);
+```
+
+## State of This Project
+
+This project in a very early stage. It's more like a proof of concept. Once proven out - we can release the first major version `1.0.0`... until then - use with caution. PRs, issues (questions, comments, bugs, anything) are welcomed!
+
+Below are environments / scenarios we've confirmed work with this project.
+
+## Support
+
+Below are "stacks" this project has been tested on.
+
+- React / Redux / Redux Thunk / React Router
+  - `create-react-app-server@3.1.1`
+  - `react@16.8.4`
+  - `react-dom@16.8.4`
+  - `react-redux@7.1.0`
+  - `react-router-dom@5.0.1`
+  - `react-router-transition@1.3.0`
+  - `redux@4.0.4`
+  - `redux-thunk@2.3.0`
 
 ## Upcoming
 
