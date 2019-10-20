@@ -82,6 +82,17 @@ import { withServerSideCaching } from '@foo-software/with-server-side-caching';
 export default withServerSideCaching(() => <h1>Hello World</h1>);
 ```
 
+Or with React Router, to affect all routes, see below.
+
+> src/Route.js
+
+```jsx
+import { Route } from 'react-router-dom';
+import { withServerSideCaching } from '@foo-software/with-server-side-caching';
+
+export default withServerSideCaching(Route);
+```
+
 ## State of This Project
 
 This project in a very early stage. It's more like a proof of concept. Once proven out - we can release the first major version `1.0.0`... until then - use with caution. PRs, issues (questions, comments, bugs, anything) are welcomed!
