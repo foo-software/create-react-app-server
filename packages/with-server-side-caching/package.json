@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/with-server-side-caching",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "HOCs and providers to cache pages of a Create React App on the server.",
   "keywords": [
     "react",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.6.3",
-    "@foo-software/create-react-app-server-helmet": "^0.0.14"
+    "@foo-software/create-react-app-server-helmet": "^0.0.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
