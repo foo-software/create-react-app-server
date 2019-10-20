@@ -20,7 +20,7 @@ Object {
     "_currentValue2": "create-react-app-server-context",
     "_threadCount": 0,
   },
-  "withCreateReactAppServer": [Function],
-  "withCreateReactAppServerProvider": [Function],
+  "withServerSideCaching": [Function],
+  "withServerSideCachingProvider": [Function],
 }
 `;
