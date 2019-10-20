@@ -7,11 +7,14 @@ import {
 
 const DATA_REACT_HELMET = 'data-react-helmet';
 
+// returns an array of attribute / value strings as they would appear
+// as part of an HTML tag.
 const getAttributes = data =>
   Object.keys(data).map(current =>
     data[current] !== true ? `${current}="${data[current]}"` : current
   );
 
+// returns a string - an HTML opening tag.
 const getOpeningTag = ({ attributeNames, attributes, isTitle, tagName }) => {
   const dataAttribute = !isTitle
     ? `${DATA_REACT_HELMET}="true"`
@@ -24,6 +27,7 @@ const getOpeningTag = ({ attributeNames, attributes, isTitle, tagName }) => {
   }>`;
 };
 
+// returns a string - an HTML tag based on params.
 const getTag = ({ data, isTitle, tagName }) => {
   const { cssText, innerHTML, ...rest } = data;
 
@@ -46,6 +50,7 @@ const getTag = ({ data, isTitle, tagName }) => {
   return tag;
 };
 
+// returns a string - a set of HTML tags based on params.
 const getTags = ({ helmet, helmetName, tagName }) => {
   if (!helmet[helmetName].length) {
     return '';
@@ -61,6 +66,8 @@ const getTags = ({ helmet, helmetName, tagName }) => {
     .join('');
 };
 
+// returns a string - an HTML (innerHTML) type of string from `react-helmet`.
+// this string will be injected into the <head /> of the document.
 const getHelmetString = helmet => {
   const linkTags = getTags({ helmet, helmetName: 'linkTags', tagName: 'link' });
   const metaTags = getTags({ helmet, helmetName: 'metaTags', tagName: 'meta' });
@@ -86,10 +93,13 @@ const getHelmetString = helmet => {
 };
 
 export default Component => props => {
+  // we only run the contents of this component when we're in a
+  // puppeteer environment.
   if (!window.CREATE_REACT_APP_SERVER_PUPPETEER) {
     return <Component {...props} />;
   }
 
+  // expose data to window for Puppeteer to extract
   const setRenderedString = () => {
     window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(CreateReactAppServerHelmet.peek());
     window.CREATE_REACT_APP_SERVER_DOM = ReactDOMServer.renderToString(<Component {...props} />);
