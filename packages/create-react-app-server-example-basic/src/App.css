@@ -21,6 +21,10 @@
   color: #09d3ac;
 }
 
+nav {
+  width: 100%;
+}
+
 ul {
   display: flex;
   width: 100%;
