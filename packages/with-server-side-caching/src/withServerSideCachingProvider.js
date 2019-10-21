@@ -18,7 +18,7 @@ const getAttributes = data =>
 const getOpeningTag = ({ attributeNames, attributes, isTitle, tagName }) => {
   const dataAttribute = !isTitle
     ? `${DATA_REACT_HELMET}="true"`
-    : `${DATA_REACT_HELMET}="${attributeNames.join()}"`;
+    : `${DATA_REACT_HELMET}="${attributeNames.join() || 'true'}"`;
 
   return `<${tagName} ${
     !attributes.length
