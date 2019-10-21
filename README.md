@@ -31,7 +31,7 @@ Below is a more elaborate explanation of the Create React App Server flow. It do
 
 ## Usage
 
-Below is a standard example assuming a Create React App project with Redux.
+Below is a standard example assuming a Create React App project with Redux and React Router.
 
 ```bash
 $ npm install @foo-software/create-react-app-server \
@@ -107,6 +107,10 @@ import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-serve
   <title>Hello World</title>
 </CreateReactAppServerHelmet>
 ```
+
+## Examples
+
+- [Diff](https://github.com/foo-software/create-react-app-server/pull/1/files) from a [basic implementation](https://github.com/foo-software/create-react-app-server/tree/master/packages/create-react-app-server-example-basic).
 
 ## State of This Project
 
