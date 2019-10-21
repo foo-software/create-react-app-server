@@ -20,3 +20,18 @@
 .App-link {
   color: #09d3ac;
 }
+
+ul {
+  display: flex;
+  width: 100%;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  flex-basis: 33.33333333%;
+}
+
+li a {
+  color: #09d3ac;
+}
