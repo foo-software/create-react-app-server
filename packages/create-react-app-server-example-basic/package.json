@@ -1,0 +1,40 @@
+{
+  "name": "@foo-software/create-react-app-server-example-basic",
+  "version": "0.0.15",
+  "description": "A collection of Create React App Server examples.",
+  "keywords": [
+    "react",
+    "ssr",
+    "server",
+    "side",
+    "rendering"
+  ],
+  "author": "Adam Henson <adamhenson1979@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "3.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
