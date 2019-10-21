@@ -2,16 +2,23 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route as RouterRoute,
   Link
 } from 'react-router-dom';
+import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-server-helmet';
+import { withServerSideCaching } from '@foo-software/with-server-side-caching';
 import logo from './logo.svg';
 import './App.css';
+
+const Route = withServerSideCaching(RouterRoute);
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <CreateReactAppServerHelmet>
+          <title>React App</title>
+        </CreateReactAppServerHelmet>
         <header className="App-header">
           <Switch>
             <Route path="/about">
@@ -56,15 +63,36 @@ function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return (
+    <>
+      <CreateReactAppServerHelmet>
+        <title>Home</title>
+      </CreateReactAppServerHelmet>
+      <h2>Home</h2>
+    </>
+  );
 }
 
 function About() {
-  return <h2>About</h2>;
+  return (
+    <>
+      <CreateReactAppServerHelmet>
+        <title>About</title>
+      </CreateReactAppServerHelmet>
+      <h2>About</h2>
+    </>
+  );
 }
 
 function Users() {
-  return <h2>Users</h2>;
+  return (
+    <>
+      <CreateReactAppServerHelmet>
+        <title>Users</title>
+      </CreateReactAppServerHelmet>
+      <h2>Users</h2>
+    </>
+  );
 }
 
 export default App;
