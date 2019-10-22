@@ -15,8 +15,8 @@
     "@foo-software/create-react-app-server": "^0.0.17",
     "@foo-software/create-react-app-server-helmet": "^0.0.17",
     "@foo-software/with-server-side-caching": "^0.0.17",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
