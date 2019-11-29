@@ -71,9 +71,9 @@ export default async ({ req, res, next, options }) => {
       if (shouldRunPuppeteer) {
         const { address, port } = global.CREATE_REACT_APP_SERVER_ADDRESS;
         const host = options.host ||
-          address.split('')[0] === ':'
+          (address.split('')[0] === ':'
             ? `http://[${address}]:${port}`
-            : `http://${address}:${port}`;
+            : `http://${address}:${port}`);
 
         logger.debug(`${LOGGER_NAMESPACE}: running puppeteer on ${host}`);
 
