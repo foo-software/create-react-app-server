@@ -21,7 +21,7 @@ export const getDomHtml = async ({ timeout, url }) => {
   isRunning = true;
 
   logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: launching browser`);
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: launched successfully`);
 
   browser.on('disconnected', () => {
