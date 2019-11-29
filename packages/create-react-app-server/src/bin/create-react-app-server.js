@@ -19,7 +19,7 @@ const defaultOptions = {
   },
   host: {
     type: 'string',
-    value: process.env.CREATE_REACT_APP_SERVER_PORT
+    value: process.env.CREATE_REACT_APP_SERVER_HOST
   },
   port: {
     type: 'string',
