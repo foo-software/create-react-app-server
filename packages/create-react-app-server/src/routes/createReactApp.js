@@ -70,7 +70,7 @@ export default async ({ req, res, next, options }) => {
       // if we want to create a new html file, utilize puppeteer
       if (shouldRunPuppeteer) {
         const { address, port } = global.CREATE_REACT_APP_SERVER_ADDRESS;
-        const host =
+        const host = options.host ||
           address.split('')[0] === ':'
             ? `http://[${address}]:${port}`
             : `http://${address}:${port}`;
