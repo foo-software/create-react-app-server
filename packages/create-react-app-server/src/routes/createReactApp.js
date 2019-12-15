@@ -98,7 +98,10 @@ export default async ({ req, res, next, options }) => {
           addUrl({ path, status, url });
 
           // respond with our new html file
-          return res.sendFile(path);
+          if (!status || status === 200) {
+            return res.sendFile(path);
+          }
+          return res.status(status).sendFile(path);
         }
       }
     }
