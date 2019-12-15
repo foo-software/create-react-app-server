@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/create-react-app-server-helmet",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A react-helmet for Create React Server",
   "keywords": [
     "react-helmet",
