@@ -53,12 +53,24 @@ export const getDomHtml = async ({ timeout, url }) => {
     await page.waitForFunction(() => 'CREATE_REACT_APP_SERVER_DOM' in window);
     logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: wait complete, page is ready`);
 
-    data = await page.evaluate(() =>
-      JSON.stringify({
+    data = await page.evaluate(() => {
+      // check for an element that tells us what status to serve
+      const statusElement = document.querySelector(
+        '[data-creat-react-app-server-status]',
+      );
+      const status = !statusElement
+        ? 200
+        : parseInt(
+          statusElement.getAttribute('data-creat-react-app-server-status'),
+          10
+        );
+
+      return JSON.stringify({
         head: window.CREATE_REACT_APP_SERVER_HEAD || '',
-        html: window.CREATE_REACT_APP_SERVER_DOM || ''
-      })
-    );
+        html: window.CREATE_REACT_APP_SERVER_DOM || '',
+        status
+      });
+    });
 
     await close();
   } catch (error) {
@@ -74,10 +86,10 @@ export const getDomHtml = async ({ timeout, url }) => {
     throw error;
   }
 
-  const { head, html } = JSON.parse(data);
-  logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: data success`, { head, html });
+  const { head, html, status } = JSON.parse(data);
+  logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: data success`, { head, html, status });
 
   isRunning = false;
 
-  return { head, html };
+  return { head, html, status };
 };

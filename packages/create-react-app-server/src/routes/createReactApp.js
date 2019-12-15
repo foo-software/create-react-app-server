@@ -78,7 +78,7 @@ export default async ({ req, res, next, options }) => {
         logger.debug(`${LOGGER_NAMESPACE}: running puppeteer on ${host}`);
 
         // get the cra dom and head string from Puppeteer if applicable
-        const { head, html } = await getDomHtml({
+        const { head, html, status } = await getDomHtml({
           // 10 seconds should be sufficient for pages without side effects
           timeout: options.puppeteerTimeout || 10000,
           url: `${host}${!isHome ? url : req.url}`
@@ -95,7 +95,7 @@ export default async ({ req, res, next, options }) => {
           });
 
           // save the url so we request the file directly next time
-          addUrl({ path, status: 200, url });
+          addUrl({ path, status, url });
 
           // respond with our new html file
           return res.sendFile(path);
