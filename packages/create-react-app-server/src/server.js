@@ -52,7 +52,7 @@ const normalizePort = val => {
   return false;
 };
 
-const onError = error => {
+const onError = ({ error, port }) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -105,6 +105,6 @@ export const startServer = async ({
   const server = http.createServer(app);
 
   server.listen(port);
-  server.on('error', onError);
+  server.on('error', error => onError({ error, port }));
   server.on('listening', () => onListening(server));
 };
