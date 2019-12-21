@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import http from 'http';
 import createApp from './app';
+import compressBuild from './helpers/compress';
 import logger from './logger';
 import {
   CREATE_REACT_APP_SERVER_PUPPETEER,
@@ -91,6 +92,8 @@ export const startServer = async ({
   ...options
 }) => {
   const craBuildPath = path.resolve(buildPath);
+
+  await compressBuild({ path: craBuildPath });
 
   createPuppeteerFile({ craBuildPath });
 
