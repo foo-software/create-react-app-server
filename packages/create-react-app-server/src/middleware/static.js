@@ -5,6 +5,7 @@ export default ({ craBuildPath, req, res, next }) => {
   if (!hasPeriodRegEx.test(req.url)) {
     return next();
   } else {
+    // support brotli and gzip compression
     expressStaticGzip(craBuildPath, {
       enableBrotli: true,
       orderPreference: ['br', 'gz']

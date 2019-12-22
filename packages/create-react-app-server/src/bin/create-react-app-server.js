@@ -17,6 +17,18 @@ const defaultOptions = {
     type: 'string',
     value: process.env.CREATE_REACT_APP_SERVER_CONFIG_FILE
   },
+  compression: {
+    type: 'boolean',
+    value: process.env.CREATE_REACT_APP_SERVER_COMPRESSION || true
+  },
+  compressionIsConcurrent: {
+    type: 'boolean',
+    value: process.env.CREATE_REACT_APP_SERVER_COMPRESSION_IS_CONCURRENT
+  },
+  compressionIsGraceful: {
+    type: 'boolean',
+    value: process.env.CREATE_REACT_APP_SERVER_COMPRESSION_IS_GRACEFUL
+  },
   host: {
     type: 'string',
     value: process.env.CREATE_REACT_APP_SERVER_HOST
