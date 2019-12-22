@@ -1,10 +1,43 @@
 import createHtmlFile from '../helpers/createHtmlFile';
 import logger from '../logger';
+import compress from '../helpers/compress';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
 import { FILENAME_PUPPETEER, HEADER_PUPPETEER } from '../constants';
 
 const LOGGER_NAMESPACE = 'createReactApp';
+
+// get the valid content coding to send in the response
+const getContentEncoding = acceptEncoding => {
+  // if Accept-Encoding header is not found
+  if (typeof acceptEncoding !== 'string') {
+    return {
+      extension: '',
+      type: null
+    };
+  }
+  
+  // an array of valid encodings supported by the client
+  const validEncodings = acceptEncoding
+    .split(',')
+    .map(item => item.trim().toLowerCase());
+  
+  // 1. if brotli is supported
+  if (validEncodings.includes('br')) {
+    return {
+      extension: '.br',
+      type: 'br'
+    };
+  }
+
+  // 2. if gzip is supported
+  if (validEncodings.includes('gzip')) {
+    return {
+      extension: '.gz',
+      type: 'gzip'
+    };
+  }
+};
 
 /**
  * an Express route. we determine if we have an HTML file to server
@@ -23,6 +56,14 @@ export default async ({ req, res, next, options }) => {
   let routeError;
 
   try {
+    // header data for compression
+    const acceptEncoding = req.header('Accept-Encoding');
+    const contentEncoding = getContentEncoding(acceptEncoding);
+    const compressedHeaders = {
+      'Content-Encoding': contentEncoding.type,
+      'Content-Type': 'text/html; charset=UTF-8'
+    };
+
     const [, secondCharacter] = req.url.split('');
     const isHome = req.url === '/' || secondCharacter === '?';
 
@@ -38,12 +79,16 @@ export default async ({ req, res, next, options }) => {
         `${LOGGER_NAMESPACE}: serving from cache: ${url}`,
         storeUrlItem
       );
+
+      const filePath = `${storeUrlItem.path}${contentEncoding.extension}`;
+
       if (storeUrlItem.status !== 200) {
-        return res.status(storeUrlItem.status).sendFile(storeUrlItem.path);
+        return res.status(storeUrlItem.status).
+          sendFile(filePath, { headers: compressedHeaders });
       }
 
       // we don't assign a status, so we can let the server use its default behavior.
-      return res.sendFile(storeUrlItem.path);
+      return res.sendFile(filePath, { headers: compressedHeaders });
     } else if (req.headers[HEADER_PUPPETEER]) {
       // else if the request is coming from puppeteer - mimic cra
       logger.debug(`${LOGGER_NAMESPACE}: serving for puppeteer: ${url}`);
@@ -94,14 +139,26 @@ export default async ({ req, res, next, options }) => {
             path
           });
 
+          // if we need to compress the file
+          if (options.compression) {
+            await compress({
+              file: path,
+              concurrent: options.compressionIsConcurrent,
+              graceful: options.compressionIsGraceful,
+            });
+          }
+
           // save the url so we request the file directly next time
           addUrl({ path, status, url });
 
           // respond with our new html file
+          const filePath = `${path}${contentEncoding.extension}`;
           if (!status || status === 200) {
-            return res.sendFile(path);
+            return res.sendFile(filePath, { headers: compressedHeaders });
           }
-          return res.status(status).sendFile(path);
+          return res.status(status).sendFile(filePath, {
+            headers: compressedHeaders
+          });
         }
       }
     }
