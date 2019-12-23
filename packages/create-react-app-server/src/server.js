@@ -5,7 +5,6 @@ import createApp from './app';
 import compress from './helpers/compress';
 import logger from './logger';
 import {
-  CREATE_REACT_APP_SERVER_PUPPETEER,
   DEFAULT_BUILD_PATH,
   FILENAME_PUPPETEER
 } from './constants';
@@ -23,13 +22,13 @@ const createPuppeteerFile = ({ craBuildPath }) => {
     .toString()
     .split(/(?<=<head>)/);
 
-  // window property so cra will know it's being requested by Puppeteer
-  const windowSetHtml = `
-    <script>window.${CREATE_REACT_APP_SERVER_PUPPETEER} = true</script>
-  `;
-
   // add the window property and join resulting html as a string
-  const updatedHtml = [beginningHtml, windowSetHtml, endingHtml].join('');
+  const updatedHtml = [
+    beginningHtml,
+    CREATE_REACT_APP_SERVER_PUPPETEER_TAG,
+    endingHtml
+  ].join('');
+
   fs.writeFileSync(templatePathPuppeteer, updatedHtml);
 
   logger.debug(

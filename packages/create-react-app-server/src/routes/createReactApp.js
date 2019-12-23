@@ -4,7 +4,7 @@ import compress from '../helpers/compress';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
 import {
-  CREATE_REACT_APP_SERVER_PUPPETEER,
+  CREATE_REACT_APP_SERVER_PUPPETEER_TAG,
   FILENAME_PUPPETEER,
   HEADER_PUPPETEER
 } from '../constants';
@@ -136,16 +136,18 @@ export default async ({ req, res, next, options }) => {
         if (head || html) {
           const filename = !isHome ? `${url}.html` : '/home.html';
           const path = `${options.craBuildPath}${filename}`;
-          let htmlContent = '';
-          const puppeteerIdentifier =
-            `<script>window.${CREATE_REACT_APP_SERVER_PUPPETEER} = true</script>`;
-          if (html) {
-            const regex = new RegExp(puppeteerIdentifier, 'g');
-            htmlContent = html.replace(regex, '');
-          }
+
+          // match puppeteer script tag identifier
+          const regExMatchPuppeteerTag = new RegExp(
+            CREATE_REACT_APP_SERVER_PUPPETEER_TAG,
+            'g'
+          );
           createHtmlFile({
-            head,
-            html: htmlContent,
+            // remove puppeteer tag
+            head: !head
+              ? null
+              : head.replace(regExMatchPuppeteerTag, ''),
+            html,
             templatePath: `${options.craBuildPath}/index.html`,
             path
           });
