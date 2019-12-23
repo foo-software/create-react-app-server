@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import React, { useRef } from 'react';
 import CreateReactAppServerContext from './CreateReactAppServerContext';
 import {
   CreateReactAppServerHelmet
@@ -99,17 +98,22 @@ export default Component => props => {
     return <Component {...props} />;
   }
 
+  // our DOM node container to get innerHTML
+  const containerEl = useRef(null);
+
   // expose data to window for Puppeteer to extract
   const setRenderedString = () => {
     window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(CreateReactAppServerHelmet.peek());
-    window.CREATE_REACT_APP_SERVER_DOM = ReactDOMServer.renderToString(<Component {...props} />);
+    window.CREATE_REACT_APP_SERVER_DOM = containerEl.current.innerHTML;
   };
 
   return (
     <CreateReactAppServerContext.Provider
       value={setRenderedString}
     >
-      <Component {...props} />
+      <div ref={containerEl}>
+        <Component {...props} />
+      </div>
     </CreateReactAppServerContext.Provider>
   );
 };
