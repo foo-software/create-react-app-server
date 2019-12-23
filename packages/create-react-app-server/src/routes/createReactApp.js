@@ -3,7 +3,11 @@ import logger from '../logger';
 import compress from '../helpers/compress';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
-import { FILENAME_PUPPETEER, HEADER_PUPPETEER } from '../constants';
+import {
+  CREATE_REACT_APP_SERVER_PUPPETEER,
+  FILENAME_PUPPETEER,
+  HEADER_PUPPETEER
+} from '../constants';
 
 const LOGGER_NAMESPACE = 'createReactApp';
 
@@ -132,9 +136,16 @@ export default async ({ req, res, next, options }) => {
         if (head || html) {
           const filename = !isHome ? `${url}.html` : '/home.html';
           const path = `${options.craBuildPath}${filename}`;
+          let htmlContent = '';
+          const puppeteerIdentifier =
+            `<script>window.${CREATE_REACT_APP_SERVER_PUPPETEER} = true</script>`;
+          if (html) {
+            const regex = new RegExp(puppeteerIdentifier, 'g');
+            htmlContent = html.replace(regex, '');
+          }
           createHtmlFile({
             head,
-            html,
+            html: htmlContent,
             templatePath: `${options.craBuildPath}/index.html`,
             path
           });
