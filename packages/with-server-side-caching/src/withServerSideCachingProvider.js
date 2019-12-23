@@ -109,7 +109,7 @@ export default Component => props => {
     <CreateReactAppServerContext.Provider
       value={setRenderedString}
     >
-      <div ref={containerEl}>
+      <div ref={containerEl} id="withServerSideCaching">
         <Component {...props} />
       </div>
     </CreateReactAppServerContext.Provider>
