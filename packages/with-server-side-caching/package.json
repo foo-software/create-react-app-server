@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/with-server-side-caching",
-  "version": "0.0.29-alpha.0",
+  "version": "0.0.29-alpha.1",
   "description": "HOCs and providers to cache pages of a Create React App on the server.",
   "keywords": [
     "react",
