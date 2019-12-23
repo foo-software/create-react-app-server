@@ -1,8 +1,5 @@
 import React, { useRef } from 'react';
 import CreateReactAppServerContext from './CreateReactAppServerContext';
-import {
-  CreateReactAppServerHelmet
-} from '@foo-software/create-react-app-server-helmet';
 
 const DATA_REACT_HELMET = 'data-react-helmet';
 
