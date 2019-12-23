@@ -5,6 +5,7 @@ import createApp from './app';
 import compress from './helpers/compress';
 import logger from './logger';
 import {
+  CREATE_REACT_APP_SERVER_PUPPETEER_TAG,
   DEFAULT_BUILD_PATH,
   FILENAME_PUPPETEER
 } from './constants';
