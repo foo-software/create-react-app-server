@@ -11,7 +11,7 @@ export default ({ craBuildPath, req, res, next }) => {
       orderPreference: ['br', 'gz'],
 
       // cache for one year because we use hashes
-      maxAge: 31536000,
+      maxAge: '1y',
     })(req, res, next);
   }
 };
