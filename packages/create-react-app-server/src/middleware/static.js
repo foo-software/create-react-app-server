@@ -8,7 +8,10 @@ export default ({ craBuildPath, req, res, next }) => {
     // support brotli and gzip compression
     expressStaticGzip(craBuildPath, {
       enableBrotli: true,
-      orderPreference: ['br', 'gz']
+      orderPreference: ['br', 'gz'],
+
+      // cache for one year because we use hashes
+      maxAge: 31536000,
     })(req, res, next);
   }
 };

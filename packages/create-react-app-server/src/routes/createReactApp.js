@@ -64,9 +64,6 @@ export default async ({ req, res, next, options }) => {
     const acceptEncoding = req.header('Accept-Encoding');
     const contentEncoding = getContentEncoding(acceptEncoding);
     const compressedHeaders = {
-      // cache for one year because we use hashes
-      'Cache-Control': 'max-age=31536000',
-
       'Content-Encoding': contentEncoding.type,
       'Content-Type': 'text/html; charset=UTF-8'
     };
