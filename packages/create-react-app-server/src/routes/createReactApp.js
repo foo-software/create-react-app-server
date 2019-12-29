@@ -1,6 +1,7 @@
 import createHtmlFile from '../helpers/createHtmlFile';
 import logger from '../logger';
 import compress from '../helpers/compress';
+import getCompressedHeaders from '../helpers/getCompressedHeaders';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
 import {
@@ -10,38 +11,6 @@ import {
 } from '../constants';
 
 const LOGGER_NAMESPACE = 'createReactApp';
-
-// get the valid content coding to send in the response
-const getContentEncoding = acceptEncoding => {
-  // if Accept-Encoding header is not found
-  if (typeof acceptEncoding !== 'string') {
-    return {
-      extension: '',
-      type: null
-    };
-  }
-  
-  // an array of valid encodings supported by the client
-  const validEncodings = acceptEncoding
-    .split(',')
-    .map(item => item.trim().toLowerCase());
-  
-  // 1. if brotli is supported
-  if (validEncodings.includes('br')) {
-    return {
-      extension: '.br',
-      type: 'br'
-    };
-  }
-
-  // 2. if gzip is supported
-  if (validEncodings.includes('gzip')) {
-    return {
-      extension: '.gz',
-      type: 'gzip'
-    };
-  }
-};
 
 /**
  * an Express route. we determine if we have an HTML file to server
@@ -62,11 +31,7 @@ export default async ({ req, res, next, options }) => {
   try {
     // header data for compression
     const acceptEncoding = req.header('Accept-Encoding');
-    const contentEncoding = getContentEncoding(acceptEncoding);
-    const compressedHeaders = {
-      'Content-Encoding': contentEncoding.type,
-      'Content-Type': 'text/html; charset=UTF-8'
-    };
+    const compressedHeaders = getCompressedHeaders(acceptEncoding);
 
     const [, secondCharacter] = req.url.split('');
     const isHome = req.url === '/' || secondCharacter === '?';

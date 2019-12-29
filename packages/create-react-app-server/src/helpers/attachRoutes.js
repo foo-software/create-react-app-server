@@ -1,6 +1,7 @@
 import createReactApp from '../routes/createReactApp';
 import logger from '../logger';
 import createReactAppServerHealth from '../routes/createReactAppServerHealth';
+import getCompressedHeaders from './getCompressedHeaders';
 import { addUrl } from '../store';
 import { HEADER_ERROR } from '../constants';
 
@@ -27,7 +28,9 @@ export default ({ app, options }) => {
     // add the url to the store so we request it directly next time
     addUrl({ path: buildIndex, status, url: req.url });
 
-    return res.status(status).sendFile(buildIndex);
+    const acceptEncoding = req.header('Accept-Encoding');
+    const compressedHeaders = getCompressedHeaders(acceptEncoding);
+    return res.status(status).sendFile(buildIndex, { headers: compressedHeaders });
   });
 
   // error handling
@@ -47,6 +50,6 @@ export default ({ app, options }) => {
       res.set(HEADER_ERROR, error);
     }
 
-    return res.status(status).sendFile(buildIndex);
+    return res.status(status).sendFile(buildIndex, { headers: compressedHeaders });
   });
 };
