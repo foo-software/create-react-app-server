@@ -1,3 +1,7 @@
+> This project is a work in progress. Please read the [State of This Project](#state-of-this-project) section.
+
+***
+
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 # Create React App Server
@@ -93,28 +97,13 @@ import { withServerSideCaching } from '@foo-software/with-server-side-caching';
 export default withServerSideCaching(Route);
 ```
 
-### With Helmet
-
-Create React Server provides its own `helmet` which extends [`react-helmet`](https://github.com/nfl/react-helmet) and allows for server side rendering of `head` elements defined in `helmet`. The API is that of `react-helmet`.
-
-Example:
-
-```jsx
-import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-server-helmet';
-
-// ...
-<CreateReactAppServerHelmet>
-  <title>Hello World</title>
-</CreateReactAppServerHelmet>
-```
-
 ## Examples
 
 - [Diff](https://github.com/foo-software/create-react-app-server/pull/1/files) from a [basic implementation](https://github.com/foo-software/create-react-app-server/tree/master/packages/create-react-app-server-example-basic).
 
 ## State of This Project
 
-This project in a very early stage. It's more like a proof of concept. Once proven out - we can release the first major version `1.0.0`... until then - use with caution. PRs, issues (questions, comments, bugs, anything) are welcomed!
+This project in a very early stage. It's more like a proof of concept. Once proven out - we can release the first major version (the first stable version) `1.0.0`... until then - use with caution. PRs, issues (questions, comments, bugs, anything) are welcomed!
 
 Below are environments / scenarios we've confirmed work with this project.
 
@@ -143,6 +132,14 @@ Below is a to-do list ordered by priority to help make this project what it shou
 - Example apps - as a package.
 - More unit tests (Jest).
 - Integration tests - as a package. Cypress could be a good framework for this. We could test the example app with newest releases.
+
+# Announcements
+
+Below is a list of important announcements / changes related to this project.
+
+## Update (12/29/2019)
+
+`@foo-software/create-react-app-server-helmet` has been deprecated and is no longer needed. You can just use [`react-helmet`](https://github.com/nfl/react-helmet).
 
 ## FAQ
 
