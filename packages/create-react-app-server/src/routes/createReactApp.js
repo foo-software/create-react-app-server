@@ -179,10 +179,10 @@ export default async ({ req, res, next, options }) => {
     routeError = error;
   }
 
-  // if we have no error or if it's a timeout error, we can serve a 404
-  if (!routeError || routeError.name === 'TimeoutError') {
+  if (!routeError) {
     next();
   } else {
+    // handle error (typically 500)
     next(routeError);
   }
 };

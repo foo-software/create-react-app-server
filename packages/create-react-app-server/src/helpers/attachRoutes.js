@@ -18,11 +18,11 @@ export default ({ app, options }) => {
 
   const buildIndex = `${options.craBuildPath}/index.html`;
 
-  // @TODO - allow an option for 404 and 5xx files.
-
-  // 404
+  // fallback
   app.use((req, res) => {
-    const status = 404;
+    // fallback to 200 status. 404s should be intentionally set via
+    // `create-react-app-server-status`
+    const status = 200;
 
     // add the url to the store so we request it directly next time
     addUrl({ path: buildIndex, status, url: req.url });
@@ -34,7 +34,10 @@ export default ({ app, options }) => {
   app.use((error, req, res, next) => {
     logger.error(error);
 
-    const status = 500;
+    // serve 500 unless it was a timeout, then 404
+    const status = error && error.name === 'TimeoutError'
+      ? 404
+      : 500;
 
     // add the url to the store so we request it directly next time
     addUrl({ path: buildIndex, status, url: req.url });
