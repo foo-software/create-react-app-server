@@ -139,7 +139,7 @@ Below is a list of important announcements / changes related to this project.
 
 ## Update (12/29/2019)
 
-`@foo-software/create-react-app-server-helmet` has been deprecated and is no longer needed. You can just use [`react-helmet`](https://github.com/nfl/react-helmet).
+`@foo-software/create-react-app-server-helmet` has been deprecated and is no longer needed when using `@foo-software/with-server-side-caching@0.0.35` or above. You can just use [`react-helmet`](https://github.com/nfl/react-helmet).
 
 ## FAQ
 
