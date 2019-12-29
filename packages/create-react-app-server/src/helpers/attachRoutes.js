@@ -2,6 +2,7 @@ import createReactApp from '../routes/createReactApp';
 import logger from '../logger';
 import createReactAppServerHealth from '../routes/createReactAppServerHealth';
 import getCompressedHeaders from './getCompressedHeaders';
+import getContentEncoding from './getContentEncoding';
 import { addUrl } from '../store';
 import { HEADER_ERROR } from '../constants';
 
@@ -29,8 +30,11 @@ export default ({ app, options }) => {
     addUrl({ path: buildIndex, status, url: req.url });
 
     const acceptEncoding = req.header('Accept-Encoding');
-    const compressedHeaders = getCompressedHeaders(acceptEncoding);
-    return res.status(status).sendFile(buildIndex, { headers: compressedHeaders });
+    const contentEncoding = getContentEncoding(acceptEncoding);
+    const compressedHeaders = getCompressedHeaders(contentEncoding);
+    return res.status(status).sendFile(`${buildIndex}${contentEncoding.extension}`, {
+      headers: compressedHeaders
+    });
   });
 
   // error handling
@@ -51,7 +55,10 @@ export default ({ app, options }) => {
     }
 
     const acceptEncoding = req.header('Accept-Encoding');
-    const compressedHeaders = getCompressedHeaders(acceptEncoding);
-    return res.status(status).sendFile(buildIndex, { headers: compressedHeaders });
+    const contentEncoding = getContentEncoding(acceptEncoding);
+    const compressedHeaders = getCompressedHeaders(contentEncoding);
+    return res.status(status).sendFile(`${buildIndex}${contentEncoding.extension}`, {
+      headers: compressedHeaders
+    });
   });
 };

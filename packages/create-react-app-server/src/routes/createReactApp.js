@@ -2,6 +2,7 @@ import createHtmlFile from '../helpers/createHtmlFile';
 import logger from '../logger';
 import compress from '../helpers/compress';
 import getCompressedHeaders from '../helpers/getCompressedHeaders';
+import getContentEncoding from '../helpers/getContentEncoding';
 import { addUrl, getUrl } from '../store';
 import { getDomHtml } from '../puppeteer';
 import {
@@ -31,7 +32,8 @@ export default async ({ req, res, next, options }) => {
   try {
     // header data for compression
     const acceptEncoding = req.header('Accept-Encoding');
-    const compressedHeaders = getCompressedHeaders(acceptEncoding);
+    const contentEncoding = getContentEncoding(acceptEncoding);
+    const compressedHeaders = getCompressedHeaders(contentEncoding);
 
     const [, secondCharacter] = req.url.split('');
     const isHome = req.url === '/' || secondCharacter === '?';
@@ -61,9 +63,7 @@ export default async ({ req, res, next, options }) => {
     } else if (req.headers[HEADER_PUPPETEER]) {
       // else if the request is coming from puppeteer - mimic cra
       logger.debug(`${LOGGER_NAMESPACE}: serving for puppeteer: ${url}`);
-      return res.sendFile(`${options.craBuildPath}/${FILENAME_PUPPETEER}`, {
-        headers: compressedHeaders
-      });
+      return res.sendFile(`${options.craBuildPath}/${FILENAME_PUPPETEER}`);
     } else {
       // else - we don't have this html file yet, so we need to create one
       let shouldRunPuppeteer = true;

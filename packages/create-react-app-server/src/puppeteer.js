@@ -47,7 +47,7 @@ export const getDomHtml = async ({ timeout, url }) => {
     });
 
     await page.goto(url);
-    logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: page.goto success`, url);
+    logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: page.goto success ${url}`);
 
     logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: waiting`);
     await page.waitForFunction(() => 'CREATE_REACT_APP_SERVER_DOM' in window);
