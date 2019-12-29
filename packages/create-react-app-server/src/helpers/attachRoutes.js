@@ -50,6 +50,8 @@ export default ({ app, options }) => {
       res.set(HEADER_ERROR, error);
     }
 
+    const acceptEncoding = req.header('Accept-Encoding');
+    const compressedHeaders = getCompressedHeaders(acceptEncoding);
     return res.status(status).sendFile(buildIndex, { headers: compressedHeaders });
   });
 };
