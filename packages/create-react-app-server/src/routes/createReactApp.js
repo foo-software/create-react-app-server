@@ -61,7 +61,9 @@ export default async ({ req, res, next, options }) => {
     } else if (req.headers[HEADER_PUPPETEER]) {
       // else if the request is coming from puppeteer - mimic cra
       logger.debug(`${LOGGER_NAMESPACE}: serving for puppeteer: ${url}`);
-      return res.sendFile(`${options.craBuildPath}/${FILENAME_PUPPETEER}`);
+      return res.sendFile(`${options.craBuildPath}/${FILENAME_PUPPETEER}`, {
+        headers: compressedHeaders
+      });
     } else {
       // else - we don't have this html file yet, so we need to create one
       let shouldRunPuppeteer = true;
