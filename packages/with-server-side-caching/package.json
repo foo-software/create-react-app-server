@@ -49,8 +49,7 @@
     "react-dom": "^16.8.4"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.6.3",
-    "@foo-software/create-react-app-server-helmet": "^0.0.33"
+    "@babel/preset-react": "^7.6.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
