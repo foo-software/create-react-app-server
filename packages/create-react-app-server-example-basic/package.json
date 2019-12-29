@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/create-react-app-server-example-basic",
-  "version": "0.0.33",
+  "version": "0.0.34-alpha.0",
   "description": "A collection of Create React App Server examples.",
   "keywords": [
     "react",
@@ -12,7 +12,7 @@
   "author": "Adam Henson <adamhenson1979@gmail.com>",
   "private": true,
   "dependencies": {
-    "@foo-software/create-react-app-server": "^0.0.33",
+    "@foo-software/create-react-app-server": "^0.0.34-alpha.0",
     "@foo-software/create-react-app-server-helmet": "^0.0.33",
     "@foo-software/with-server-side-caching": "^0.0.33",
     "react": "^16.8.4",
