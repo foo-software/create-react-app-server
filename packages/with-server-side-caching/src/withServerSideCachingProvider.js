@@ -122,7 +122,7 @@ export default Component => props => {
     return <Component {...props} />;
   }
 
-  // our DOM node container to get innerHTML
+  // our DOM node container to get innerHTML.
   const containerEl = useRef(null);
 
   // expose data to window for Puppeteer to extract
