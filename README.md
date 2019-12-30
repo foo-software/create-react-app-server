@@ -97,6 +97,20 @@ import { withServerSideCaching } from '@foo-software/with-server-side-caching';
 export default withServerSideCaching(Route);
 ```
 
+### With Helmet
+
+Create React Server provides its own `helmet` which extends [`react-helmet`](https://github.com/nfl/react-helmet) and allows for server side rendering of `head` elements defined in `helmet`. The API is that of `react-helmet`.
+
+Example:
+
+```jsx
+import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-server-helmet';
+// ...
+<CreateReactAppServerHelmet>
+  <title>Hello World</title>
+</CreateReactAppServerHelmet>
+```
+
 ## Examples
 
 - [Diff](https://github.com/foo-software/create-react-app-server/pull/1/files) from a [basic implementation](https://github.com/foo-software/create-react-app-server/tree/master/packages/create-react-app-server-example-basic).
@@ -136,10 +150,6 @@ Below is a to-do list ordered by priority to help make this project what it shou
 # Announcements
 
 Below is a list of important announcements / changes related to this project.
-
-## Update (12/29/2019)
-
-`@foo-software/create-react-app-server-helmet` has been deprecated and is no longer needed when using `@foo-software/with-server-side-caching@0.0.35` or above. You can just use [`react-helmet`](https://github.com/nfl/react-helmet).
 
 ## FAQ
 
