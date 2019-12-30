@@ -16,6 +16,10 @@ export default Component => props => {
     window.CREATE_REACT_APP_SERVER_HEAD = document.getElementsByTagName(
       'head'
     )[0].innerHTML;
+    console.log(
+      'window.CREATE_REACT_APP_SERVER_HEAD',
+      window.CREATE_REACT_APP_SERVER_HEAD
+    );
     window.CREATE_REACT_APP_SERVER_DOM = containerEl.current.innerHTML;
   };
 
