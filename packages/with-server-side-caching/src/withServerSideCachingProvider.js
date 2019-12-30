@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import CreateReactAppServerContext from './CreateReactAppServerContext';
+import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-server-helmet';
 
 const DATA_REACT_HELMET = 'data-react-helmet';
 
@@ -56,7 +57,7 @@ const getTags = ({ helmet, helmetName, tagName }) => {
     .map(current =>
       getTag({
         data: current,
-        tagName,
+        tagName
       })
     )
     .join('');
@@ -67,8 +68,16 @@ const getTags = ({ helmet, helmetName, tagName }) => {
 const getHelmetString = helmet => {
   const linkTags = getTags({ helmet, helmetName: 'linkTags', tagName: 'link' });
   const metaTags = getTags({ helmet, helmetName: 'metaTags', tagName: 'meta' });
-  const scriptTags = getTags({ helmet, helmetName: 'scriptTags', tagName: 'script' });
-  const styleTags = getTags({ helmet, helmetName: 'styleTags', tagName: 'style' });
+  const scriptTags = getTags({
+    helmet,
+    helmetName: 'scriptTags',
+    tagName: 'script'
+  });
+  const styleTags = getTags({
+    helmet,
+    helmetName: 'styleTags',
+    tagName: 'style'
+  });
 
   const baseTag = !helmet.baseTag.length
     ? ''
@@ -100,15 +109,14 @@ export default Component => props => {
 
   // expose data to window for Puppeteer to extract
   const setRenderedString = () => {
-    window.CREATE_REACT_APP_SERVER_HEAD =
-      document.getElementsByTagName('head')[0].innerHTML;
+    window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(
+      CreateReactAppServerHelmet.peek()
+    );
     window.CREATE_REACT_APP_SERVER_DOM = containerEl.current.innerHTML;
   };
 
   return (
-    <CreateReactAppServerContext.Provider
-      value={setRenderedString}
-    >
+    <CreateReactAppServerContext.Provider value={setRenderedString}>
       <div ref={containerEl} id="withServerSideCaching">
         <Component {...props} />
       </div>

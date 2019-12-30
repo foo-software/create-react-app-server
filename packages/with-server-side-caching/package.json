@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.6.3",
-    "@foo-software/create-react-app-server-helmet": "^0.0.33"
+    "@foo-software/create-react-app-server-helmet": "0.0.33"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
