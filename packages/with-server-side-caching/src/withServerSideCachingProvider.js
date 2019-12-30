@@ -64,8 +64,9 @@ const getTags = ({ helmet, helmetName, tagName }) => {
 };
 
 // returns a string - an HTML (innerHTML) type of string from `react-helmet`.
-// this string will be injected into the <head /> of the document.
-const getHelmetString = helmet => {
+// this string will be injected into the <head /> of the document. each method
+// checks for existence of duplicates.
+const getHeadString = ({ head, helmet }) => {
   const linkTags = getTags({ helmet, helmetName: 'linkTags', tagName: 'link' });
   const metaTags = getTags({ helmet, helmetName: 'metaTags', tagName: 'meta' });
   const scriptTags = getTags({
@@ -83,6 +84,12 @@ const getHelmetString = helmet => {
     ? ''
     : getTag({ data: helmet.baseTag[0], tagName: 'base' });
 
+  // if we have a new base tag remove the old one if it existed.
+  const oldBaseTag = head.getElementsByTagName('base')[0];
+  if (baseTag && oldBaseTag) {
+    oldBaseTag.remove();
+  }
+
   const titleTag = !helmet.title
     ? ''
     : getTag({
@@ -94,7 +101,18 @@ const getHelmetString = helmet => {
         isTitle: true
       });
 
-  return titleTag + baseTag + linkTags + metaTags + scriptTags + styleTags;
+  // if we have a new title tag remove the old one if it existed.
+  const oldTitleTag = head.getElementsByTagName('title')[0];
+  if (titleTag && oldTitleTag) {
+    oldTitleTag.remove();
+  }
+
+  // concatenate head html with helmet
+  const helmetString =
+    titleTag + baseTag + linkTags + metaTags + scriptTags + styleTags;
+  const headString = head.innerHTML;
+
+  return headString + helmetString;
 };
 
 export default Component => props => {
@@ -109,9 +127,14 @@ export default Component => props => {
 
   // expose data to window for Puppeteer to extract
   const setRenderedString = () => {
-    window.CREATE_REACT_APP_SERVER_HEAD = getHelmetString(
-      CreateReactAppServerHelmet.peek()
-    );
+    // get a cloned version of the head element so we can manipulate
+    const head = document.getElementsByTagName('head')[0].cloneNode(true);
+
+    // merge head with helmet and workout any dupes
+    window.CREATE_REACT_APP_SERVER_HEAD = getHeadString({
+      head,
+      helmet: CreateReactAppServerHelmet.peek()
+    });
     window.CREATE_REACT_APP_SERVER_DOM = containerEl.current.innerHTML;
   };
 
