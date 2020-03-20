@@ -1072,17 +1072,24 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@foo-software/create-react-app-server-helmet@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@foo-software/create-react-app-server-helmet/-/create-react-app-server-helmet-0.0.30.tgz#49ce0426447e50b68121295d8862b5952e6774f1"
-  integrity sha512-zhSVrgdRrjlOrSEoc/6dUNo3N5AgaiSnXdwtybrLYH9LbhC2lPgkS4xSRpQJpT0a+zDNzlEKm4V6E18QpxKGng==
+"@foo-software/create-react-app-server-helmet@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@foo-software/create-react-app-server-helmet/-/create-react-app-server-helmet-0.0.33.tgz#aad0f6366ffa7300fa269ccab5c9d2e00214751c"
+  integrity sha512-LDQmLpEN5szMuRxew3ruUtaAeVSyUfh0Oj8YLbdtq+ICkZS5j+HYHZ6xRmr29y+pkuJVJ7b+sfZdlfywvlfkxg==
   dependencies:
     react-helmet "5.2.1"
 
-"@foo-software/create-react-app-server@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@foo-software/create-react-app-server/-/create-react-app-server-0.0.30.tgz#bbdb5a65ea0536156cfbe72036d2d33b50ab0f6e"
-  integrity sha512-9Ed2+fLpVdBQM+MWg8kHr7xznGJ7u1kpaISSjyW1z6vQu/l9umCaobdQb5alWEs+vSChPmjKJfnEpTl/f99kJg==
+"@foo-software/create-react-app-server-helmet@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@foo-software/create-react-app-server-helmet/-/create-react-app-server-helmet-0.0.35.tgz#9366e67d3c09d6c9f1803d6a8dc719f0533abcb9"
+  integrity sha512-IO77i72yqYCBYzsZD2Mq77Iq6i0ydOXV4Rws/5McVuKdJfucbjtvneGiO5bt792zbcgsaY28Vxk2+6J1QuWWzQ==
+  dependencies:
+    react-helmet "5.2.1"
+
+"@foo-software/create-react-app-server@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@foo-software/create-react-app-server/-/create-react-app-server-0.0.35.tgz#868a4ffcaad33aff3f2b715f9014a2436ce7f62f"
+  integrity sha512-Q3VDCHBVQUxMQePvzFmvPCeZ+Cye5k6b8KjPg+i8SoRrEAy6pNtNn1tmW2aIHm4lsaJ20RVKRWr12P5hcBfgJg==
   dependencies:
     "@babel/preset-react" "^7.6.3"
     brotli "^1.3.2"
@@ -1096,13 +1103,13 @@
     winston "^3.2.1"
     zlib "^1.0.5"
 
-"@foo-software/with-server-side-caching@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@foo-software/with-server-side-caching/-/with-server-side-caching-0.0.30.tgz#4ef658b9371c3b9cfadf8292585ee6e1fa3548cc"
-  integrity sha512-0pkiFBs/OLTlT+bY49Xj2MLOQ9h9Fs/IfhJl+eZKUdzaox9mJuxcVjYrL+i7gz8sIO+DS48KTiaDEPDutotQiw==
+"@foo-software/with-server-side-caching@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@foo-software/with-server-side-caching/-/with-server-side-caching-0.0.37.tgz#27fba0b49727350a05e643419c4c73d610aa44b8"
+  integrity sha512-5AdatiLPQSBviaxDlLdl9LVwkgFK7Agtv/9umBTqdLUeuQbe8NDXKHAg0oIrVz5rW0Hynj7pPeX96D/UjS1UcQ==
   dependencies:
     "@babel/preset-react" "^7.6.3"
-    "@foo-software/create-react-app-server-helmet" "^0.0.30"
+    "@foo-software/create-react-app-server-helmet" "0.0.33"
 
 "@hapi/address@2.x.x":
   version "2.0.0"
@@ -1774,9 +1781,9 @@ acorn-walk@^6.0.1:
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 acorn@^6.0.1, acorn@^6.0.4, acorn@^6.0.7, acorn@^6.2.1:
   version "6.3.0"
