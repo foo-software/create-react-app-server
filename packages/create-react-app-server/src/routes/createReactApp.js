@@ -101,7 +101,14 @@ export default async ({ req, res, next, options }) => {
         });
 
         if (head || html) {
-          const filename = !isHome ? `${url}.html` : '/home.html';
+          const lastCharacter = url[url.length - 1];
+
+          // ensure we support urls with trailing forward slash
+          const urlFilename = lastCharacter !== '/'
+            ? url
+            : `${url}_`;
+
+          const filename = !isHome ? `${urlFilename}.html` : '/home.html';
           const path = `${options.craBuildPath}${filename}`;
 
           // match puppeteer script tag identifier
