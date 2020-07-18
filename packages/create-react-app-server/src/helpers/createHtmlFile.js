@@ -21,11 +21,12 @@ export default ({ head, html, templatePath, path }) => {
 
   // update <head> if we have it
   if (head) {
-    const [beforeClosingHead, closingHeadAndAfter] = updatedHtml.split(
-      /(?=<\/head>)/
+    const headTag = '<head>';
+    const [beforeOpeningHead, afterOpeningHead] = updatedHtml.split(
+      headTag
     );
 
-    updatedHtml = [beforeClosingHead, head, closingHeadAndAfter].join('');
+    updatedHtml = [beforeOpeningHead, headTag, head, afterOpeningHead].join('');
     logger.debug(`${LOGGER_NAMESPACE}: updated html with head`);
   }
 
