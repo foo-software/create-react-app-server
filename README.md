@@ -1,4 +1,4 @@
-> This project is a work in progress. Please read the [State of This Project](#state-of-this-project) section.
+> **UPDATE**: This project is not stable and will no longer be maintained. As the author of this project I believe the time and energy of community contributions and mine could be better spent creating an entire framework that is built for universal rendering.
 
 ***
 
@@ -114,42 +114,6 @@ import { CreateReactAppServerHelmet } from '@foo-software/create-react-app-serve
 ## Examples
 
 - [Diff](https://github.com/foo-software/create-react-app-server/pull/1/files) from a [basic implementation](https://github.com/foo-software/create-react-app-server/tree/master/packages/create-react-app-server-example-basic).
-
-## State of This Project
-
-This project in a very early stage. It's more like a proof of concept. Once proven out - we can release the first major version (the first stable version) `1.0.0`... until then - use with caution. PRs, issues (questions, comments, bugs, anything) are welcomed!
-
-Below are environments / scenarios we've confirmed work with this project.
-
-## Support
-
-Below are "stacks" this project has been tested on.
-
-- React / Redux / Redux Thunk / React Router
-  - `create-react-app-server@3.1.1`
-  - `react@16.8.4`
-  - `react-dom@16.8.4`
-  - `react-redux@7.1.0`
-  - `react-router-dom@5.0.1`
-  - `react-router-transition@1.3.0`
-  - `redux@4.0.4`
-  - `redux-thunk@2.3.0`
-
-## Upcoming
-
-Below is a to-do list ordered by priority to help make this project what it should be. PRs are welcome 🙏
-
-- Fix Prettier. When I split out packages in Lerna, I broke Prettier for each. This will need to be a shared configuration somehow.
-- Provide implementation option to customize Express.
-- Provide implementation option to customize static files in Express (caching, etc).
-- GitHub Action - workflow. Create a workflow to run tests.
-- Example apps - as a package.
-- More unit tests (Jest).
-- Integration tests - as a package. Cypress could be a good framework for this. We could test the example app with newest releases.
-
-# Announcements
-
-Below is a list of important announcements / changes related to this project.
 
 ## FAQ
 
