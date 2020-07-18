@@ -21,15 +21,8 @@ export default ({ head, html, templatePath, path }) => {
 
   // update <head> if we have it
   if (head) {
-    const [beforeClosingHead, closingHeadAndAfter] = updatedHtml.split(
-      /(?=<\/head>)/
-    );
-
-    logger.debug(`${LOGGER_NAMESPACE}: beforeClosingHead: \n\n${beforeClosingHead}\n\n`);
-    logger.debug(`${LOGGER_NAMESPACE}: head: \n\n${head}\n\n`);
-    logger.debug(`${LOGGER_NAMESPACE}: closingHeadAndAfter: \n\n${closingHeadAndAfter}\n\n`);
-
-    updatedHtml = [beforeClosingHead, head, closingHeadAndAfter].join('');
+    const currentHeadMatches = updatedHtml.match(/<head>.*?<\/head>/g);
+    updatedHtml = updatedHtml.replace(currentHeadMatches[0], `<head>${head}</head>`);
     logger.debug(`${LOGGER_NAMESPACE}: updated html with head`);
   }
 
