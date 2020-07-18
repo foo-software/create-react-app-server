@@ -112,7 +112,7 @@ const getHeadString = ({ head, helmet }) => {
     metaTags + baseTag + titleTag + linkTags + scriptTags + styleTags;
   const headString = head.innerHTML;
 
-  return headString + helmetString;
+  return helmetString + headString;
 };
 
 export default Component => props => {
