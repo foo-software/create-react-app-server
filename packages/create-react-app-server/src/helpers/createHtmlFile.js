@@ -25,6 +25,10 @@ export default ({ head, html, templatePath, path }) => {
       /(?=<\/head>)/
     );
 
+    logger.debug(`${LOGGER_NAMESPACE}: beforeClosingHead: \n\n${beforeClosingHead}\n\n`);
+    logger.debug(`${LOGGER_NAMESPACE}: head: \n\n${head}\n\n`);
+    logger.debug(`${LOGGER_NAMESPACE}: closingHeadAndAfter: \n\n${closingHeadAndAfter}\n\n`);
+
     updatedHtml = [beforeClosingHead, head, closingHeadAndAfter].join('');
     logger.debug(`${LOGGER_NAMESPACE}: updated html with head`);
   }

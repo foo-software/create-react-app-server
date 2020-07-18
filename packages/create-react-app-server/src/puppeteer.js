@@ -6,6 +6,8 @@ const LOGGER_NAMESPACE = 'puppeteer';
 
 let isRunning = false;
 
+const { LOG_LEVEL } = process.env;
+
 const RETRY_DELAY = 5000;
 const delay = () => new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
 
@@ -21,7 +23,10 @@ export const getDomHtml = async ({ timeout, url }) => {
   isRunning = true;
 
   logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: launching browser`);
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox'],
+    ...(LOG_LEVEL !== 'debug' ? {} : { dumpio: true }),
+  });
   logger.debug(`${LOGGER_NAMESPACE_FUNCTION}: launched successfully`);
 
   browser.on('disconnected', () => {
