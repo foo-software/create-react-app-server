@@ -109,7 +109,7 @@ const getHeadString = ({ head, helmet }) => {
 
   // concatenate head html with helmet
   const helmetString =
-    titleTag + baseTag + linkTags + metaTags + scriptTags + styleTags;
+    metaTags + baseTag + titleTag + linkTags + scriptTags + styleTags;
   const headString = head.innerHTML;
 
   return headString + helmetString;
