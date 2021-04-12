@@ -1,6 +1,6 @@
 {
   "name": "@foo-software/create-react-app-server-status",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "A custom status identifier for Create React Server",
   "keywords": [
     "cra",
